@@ -64,7 +64,7 @@ num_pipeline = Pipeline([
 
 # create the pipeline for categorical features
 cat_pipeline = Pipeline([
-        ("ordinal_encoder", OrdinalEncoder()),    
+        ("ordinal_encoder", OrdinalEncoder()),
         ("imputer", SimpleImputer(strategy="most_frequent")),
         ("cat_encoder", OneHotEncoder(sparse=False)),
     ])
@@ -109,6 +109,8 @@ def get_f1_score(model):
     from sklearn.model_selection import cross_val_predict
     y_train_pred = cross_val_predict(model, train_prepared, y_train, cv=3)
     return f1_score(y_train, y_train_pred)
+
+"""
 # Logistic Regression
 log_reg = LogisticRegression()
 log_reg_score = get_score(log_reg)
@@ -124,3 +126,47 @@ svc_cross_val_score = get_cross_val_score(svc)
 svc_confusion_matrix = get_confusion_matrix(svc)
 svc_f1_score = get_f1_score(svc)
 print(svc_score, svc_cross_val_score, svc_confusion_matrix, get_f1_score(svc),svc_f1_score, sep='\n')
+
+# Random Forest Classifier
+forest_clf = RandomForestClassifier()
+forest_clf_score = get_score(forest_clf)
+forest_clf_cross_val_score = get_cross_val_score(forest_clf)
+forest_clf_confusion_matrix = get_confusion_matrix(forest_clf)
+forest_clf_f1_score = get_f1_score(forest_clf)
+print(forest_clf_score, forest_clf_cross_val_score, forest_clf_confusion_matrix, get_f1_score(forest_clf),forest_clf_f1_score, sep='\n')
+
+# KNeighborsClassifier
+knn = KNeighborsClassifier()
+knn_score = get_score(knn)
+knn_cross_val_score = get_cross_val_score(knn)
+knn_confusion_matrix = get_confusion_matrix(knn)
+knn_f1_score = get_f1_score(knn)
+print(knn_score, knn_cross_val_score, knn_confusion_matrix, get_f1_score(knn),knn_f1_score, sep='\n')
+"""
+# do some feature engineering
+# tune the hyperparameters
+from sklearn.model_selection import GridSearchCV
+param_grid = [
+    {'n_estimators': [3, 10, 30, 50, 100], 'max_features': [2, 4, 6, 8, 10, 12, 14, 16]},
+    {'bootstrap': [False], 'n_estimators': [3, 10, 30, 50, 100], 'max_features': [2, 3, 4, 5, 6, 7, 8, 9, 10]},
+    ]
+forest_clf = RandomForestClassifier()
+grid_search = GridSearchCV(forest_clf, param_grid, cv=5, scoring='neg_mean_squared_error', return_train_score=True)
+grid_search.fit(train_prepared, y_train)
+print(grid_search.best_params_)
+print(grid_search.best_estimator_)
+print(grid_search.best_score_)
+# get the feature importance
+feature_importances = grid_search.best_estimator_.feature_importances_
+print(feature_importances)
+# get the score
+final_model = grid_search.best_estimator_
+final_score = get_score(final_model)
+final_cross_val_score = get_cross_val_score(final_model)
+final_confusion_matrix = get_confusion_matrix(final_model)
+final_f1_score = get_f1_score(final_model)
+print(final_score, final_cross_val_score, final_confusion_matrix, get_f1_score(final_model),final_f1_score, sep='\n')
+
+# predict the test data
+y_pred = final_model.predict(test_prepared)
+print(y_pred)

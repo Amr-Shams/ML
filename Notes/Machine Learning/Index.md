@@ -32,5 +32,9 @@ in this chapter we will go through various types of algorithms used in machine l
 	2. [[Gradient Descent]]
 	3. [[Polynomial Regression]]
 	4. [[Learning Curves]]
-	5. 
+	5. [[Regularized Linear Models]]
+	6. [[ Early Stopping]]
+	7. [[ware between modeles]]
+	8. 
+
 

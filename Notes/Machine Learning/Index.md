@@ -27,5 +27,10 @@ in this chapter we will go through various types of algorithms used in machine l
 	18. [[precision and recall ]]
 	19. [[F-score]]
 	20. [[ROC]]
-	21. 
+3. [[Models tranning]]
+	1. [[linear regression]]
+	2. [[Gradient Descent]]
+	3. [[Polynomial Regression]]
+	4. [[Learning Curves]]
+	5. 
 

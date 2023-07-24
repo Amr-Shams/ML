@@ -13,7 +13,7 @@ Two custom transformers are used to extract features from the email text:
 ## Model Training and Evaluation
 Two models, Naive Bayes and Random Forest, are trained and evaluated using the following steps:
 1. Fit the models using `fit()` on the training data.
-2. Generate predictions using `predict()` on the testing data.
+2. Generate predictions using `predict()` on the testing data.w
 3. Print the classification report, which provides metrics such as precision, recall, F1-score, and support for each class.
 
 ## Further Improvements

@@ -8,7 +8,7 @@ from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 from sklearn.impute import SimpleImputer
 from sklearn.compose import ColumnTransformer
-from sklearn.preprocessing import OneHotEncoder
+from sklearn.preprocessing import OneHotEncodercvcv
 from sklearn.preprocessing import OrdinalEncoder
 
 # load data
@@ -170,3 +170,18 @@ print(final_score, final_cross_val_score, final_confusion_matrix, get_f1_score(f
 # predict the test data
 y_pred = final_model.predict(test_prepared)
 print(y_pred)
+
+
+import numpy as np
+
+np.random.seed(42)  # to make this code example reproducible
+m = 100  # number of instances
+X = 2 * np.random.rand(m, 1)  # column vector
+y = 4 + 3 * X + np.random.randn(m, 1)  # column vector
+
+# let's plot our data as points in 2D space
+plt.plot(X, y, "b.")
+plt.xlabel("$x_1$", fontsize=18)
+plt.ylabel("$y$", rotation=0, fontsize=18)
+plt.axis([0, 2, 0, 15])
+plt.show()

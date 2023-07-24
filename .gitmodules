@@ -1,0 +1,3 @@
+[submodule "HandsOnML-Notes"]
+	path = HandsOnML-Notes
+	url = https://github.com/Amr-Shams/HandsOnML-Notes.git
